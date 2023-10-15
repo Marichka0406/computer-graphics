@@ -4,10 +4,10 @@ class KochSnowflake extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: props.selectedKochFractal,
       iterations: props.iterations || 0,
       color: props.color || '#000000',
       size: props.size || 1100, // Adjust this to set the size of the fractal
+      selectedKochFractal: props.selectedKochFractal,
     };
   }
 
@@ -28,13 +28,13 @@ class KochSnowflake extends Component {
     this.drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color);
   }
 
-    drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color) {
-    this.drawKochFractal(ctx, p1, p2, iterations, size, color);
-    this.drawKochFractal(ctx, p2, p3, iterations, size, color);
-    this.drawKochFractal(ctx, p3, p1, iterations, size, color);
+    drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color, selectedKochFractal) {
+    this.drawKochFractal(ctx, p1, p2, iterations, size, color, selectedKochFractal);
+    this.drawKochFractal(ctx, p2, p3, iterations, size, color, selectedKochFractal);
+    this.drawKochFractal(ctx, p3, p1, iterations, size, color, selectedKochFractal);
   }
 
-  drawKochFractal(ctx, p1, p2, iterations, size, color) {
+  drawKochFractal(ctx, p1, p2, iterations, size, color, selectedKochFractal) {
     if (iterations === 0) {
       // Draw a line segment
       ctx.beginPath();
@@ -43,25 +43,34 @@ class KochSnowflake extends Component {
       ctx.strokeStyle = color;
       ctx.stroke();
     } else {
+
+      let rand1 = 1;
+      let rand2 = 1;
+
+      if(selectedKochFractal == "randomized"){
+        rand1 = Math.random()  * (1 - 0.1) + 0.1; 
+        rand2 = Math.random()  * (1 - 0.1) + 0.1;
+      }
+
       // Calculate new points
       const p3 = {
-        x: p1.x + (p2.x - p1.x) / 3,
-        y: p1.y + (p2.y - p1.y) / 3,
+        x: p1.x + rand1 * (p2.x - p1.x) / 3,
+        y: p1.y + rand2 * (p2.y - p1.y) / 3,
       };
       const p4 = {
-        x: p1.x + (p2.x - p1.x) / 2 + (p2.y - p1.y) * (Math.sqrt(3) / 6),
-        y: p1.y + (p2.y - p1.y) / 2 - (p2.x - p1.x) * (Math.sqrt(3) / 6),
+        x: p1.x + rand1 * (p2.x - p1.x) / 2 + (p2.y - p1.y) * (Math.sqrt(3) / 6),
+        y: p1.y + rand2 * (p2.y - p1.y) / 2 - (p2.x - p1.x) * (Math.sqrt(3) / 6),
       };
       const p5 = {
-        x: p1.x + (p2.x - p1.x) * 2 / 3,
-        y: p1.y + (p2.y - p1.y) * 2 / 3,
+        x: p1.x + rand1 * (p2.x - p1.x) * 2 / 3,
+        y: p1.y + rand2 * (p2.y - p1.y) * 2 / 3,
       };
 
       // Recursively draw smaller segments
-      this.drawKochFractal(ctx, p1, p3, iterations - 1, size, color);
-      this.drawKochFractal(ctx, p3, p4, iterations - 1, size, color);
-      this.drawKochFractal(ctx, p4, p5, iterations - 1, size, color);
-      this.drawKochFractal(ctx, p5, p2, iterations - 1, size, color);
+      this.drawKochFractal(ctx, p1, p3, iterations - 1, size, color, selectedKochFractal);
+      this.drawKochFractal(ctx, p3, p4, iterations - 1, size, color, selectedKochFractal);
+      this.drawKochFractal(ctx, p4, p5, iterations - 1, size, color, selectedKochFractal);
+      this.drawKochFractal(ctx, p5, p2, iterations - 1, size, color, selectedKochFractal);
     }
   }
 
@@ -71,6 +80,8 @@ class KochSnowflake extends Component {
         prevProps.color !== this.props.color ||
         prevProps.selectedKochFractal !== this.props.selectedKochFractal
     ) {
+        console.log(this.props.selectedKochFractal)
+
         const canvas = this.refs.canvas;
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -91,7 +102,7 @@ class KochSnowflake extends Component {
         };
 
         // Call the function to draw the Koch Snowflake
-        this.drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color);
+        this.drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color, selectedKochFractal);
         this.render();
     }
 }

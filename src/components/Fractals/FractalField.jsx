@@ -13,9 +13,6 @@ function FractalField({ currentTab, color, iterationsNumber, selectedKochFractal
     //тут треба буде міняти. Решту - використовувати.
     // Загалом якось так) Формат зображень я не дуже знаю, який потрібно, тому сам вибереш
 
-    console.log(iterationsNumber);
-    console.log(color);
-    
    return (
     <Box
       sx={{
