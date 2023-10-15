@@ -16,7 +16,7 @@ function FractalsMenu({
   setIterationsNumber,
   selectedKochFractal,
   setKochFractal,
-  savedImage, //цю річ тобі потрібно буде швидше за все використати  у події на клік saveButton
+  savedImage, 
 }) {
 
   const isSmallScreen = useMediaQuery("(max-width:700px)");
