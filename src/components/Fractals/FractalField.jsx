@@ -15,7 +15,8 @@ function FractalField({ currentTab, color, iterationsNumber, selectedKochFractal
 
     console.log(iterationsNumber);
     console.log(color);
-  return (
+    
+   return (
     <Box
       sx={{
         paddingTop: 10,
@@ -26,7 +27,7 @@ function FractalField({ currentTab, color, iterationsNumber, selectedKochFractal
       }}
     >
 
-    <KochFractal iterations={iterationsNumber} color={color} />
+    <KochFractal iterations={iterationsNumber} color={color} selectedKochFractal={selectedKochFractal}/>
 
 
       {/* <img src={savedImage} width="80%" alt="Fractal image" /> */}

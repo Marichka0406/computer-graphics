@@ -4,8 +4,9 @@ class KochSnowflake extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      iterations: props.iterations,// || 0,
-      color: props.color,// || '#f00000',
+      type: props.selectedKochFractal,
+      iterations: props.iterations || 0,
+      color: props.color || '#000000',
       size: props.size || 1100, // Adjust this to set the size of the fractal
     };
   }
@@ -27,7 +28,7 @@ class KochSnowflake extends Component {
     this.drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color);
   }
 
-  drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color) {
+    drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color) {
     this.drawKochFractal(ctx, p1, p2, iterations, size, color);
     this.drawKochFractal(ctx, p2, p3, iterations, size, color);
     this.drawKochFractal(ctx, p3, p1, iterations, size, color);
@@ -63,6 +64,37 @@ class KochSnowflake extends Component {
       this.drawKochFractal(ctx, p5, p2, iterations - 1, size, color);
     }
   }
+
+  componentDidUpdate(prevProps) {
+    if (
+        prevProps.iterations !== this.props.iterations ||
+        prevProps.color !== this.props.color ||
+        prevProps.selectedKochFractal !== this.props.selectedKochFractal
+    ) {
+        const canvas = this.refs.canvas;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const size = this.state.size;
+        const iterations = this.props.iterations;
+        const color = this.props.color;
+        const selectedKochFractal = this.props.selectedKochFractal;
+
+        this.setState({iterations, color, size, selectedKochFractal});
+
+        // Define the starting points of the equilateral triangle
+        const p1 = { x: size * 0.3 - size * 0.3, y: 150 };
+        const p2 = { x: size * 0.7 - size * 0.3, y: 150 };
+        const p3 = {
+            x: (p1.x + p2.x) / 2 + (p1.y - p2.y) * (Math.sqrt(3) / 2),
+            y: (p1.y + p2.y) / 2 + (p2.x - p1.x) * (Math.sqrt(3) / 2),
+        };
+
+        // Call the function to draw the Koch Snowflake
+        this.drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color);
+        this.render();
+    }
+}
 
   render() {
     return <canvas ref="canvas" width={700} height={700}></canvas>;

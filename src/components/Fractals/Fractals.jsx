@@ -6,13 +6,13 @@ import { Box } from "@mui/material";
 
 function Fractals() {
   const [currentTab, setCurrentTab] = useState("koch");
-  const [color, setSelectedColor] = useState("#000");
+  const [color, setSelectedColor] = useState("#000000");
   const [iterationsNumber, setIterationsNumber] = useState(0); 
   const [selectedKochFractal, setKochFractal] = useState("island");
   const [savedImage, setSavedImage] = useState(kochImage);
 
   useEffect(() => {
-    setSelectedColor("#000");
+    setSelectedColor("#000000");
     setIterationsNumber(0);
     setKochFractal("island");
   }, [currentTab]);
