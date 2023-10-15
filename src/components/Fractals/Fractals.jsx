@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 function Fractals() {
   const [currentTab, setCurrentTab] = useState("koch");
   const [color, setSelectedColor] = useState("#000");
-  const [iterationsNumber, setIterationsNumber] = useState(1);
+  const [iterationsNumber, setIterationsNumber] = useState(0); 
   const [selectedKochFractal, setKochFractal] = useState("island");
   const [savedImage, setSavedImage] = useState(kochImage);
 

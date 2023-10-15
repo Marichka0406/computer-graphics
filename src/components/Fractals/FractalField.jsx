@@ -1,5 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
+import KochFractal from "./KochSnowflake"
 
 function FractalField({ currentTab, color, iterationsNumber, selectedKochFractal, savedImage, setSavedImage}) {
   //Використовуй пропси для своєї частини ( то шо в дужках ). Пропси - це просто тіпа змінні які міняються у процесі
@@ -11,16 +12,24 @@ function FractalField({ currentTab, color, iterationsNumber, selectedKochFractal
     //savedImage і setSavedImage потрібно встановлювати кожен раз коли аимальовується нова картинка, тобто тоді, коли вона міняється, тому ці пропси 
     //тут треба буде міняти. Решту - використовувати.
     // Загалом якось так) Формат зображень я не дуже знаю, який потрібно, тому сам вибереш
+
+    console.log(iterationsNumber);
+    console.log(color);
   return (
     <Box
       sx={{
         paddingTop: 10,
+        paddingLeft: 40,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <img src={savedImage} width="80%" alt="Fractal image" />
+
+    <KochFractal iterations={iterationsNumber} color={color} />
+
+
+      {/* <img src={savedImage} width="80%" alt="Fractal image" /> */}
     </Box>
   );
 }

@@ -88,8 +88,8 @@ function FractalsMenu({
         type="number"
         label="Enter number"
         inputProps={{
-          min: 1,
-          max: 1000000,
+          min: 0,
+          max: 7,
         }}
         sx={{
           backgroundColor: "white",
