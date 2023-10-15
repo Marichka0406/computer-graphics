@@ -13,23 +13,43 @@ function FractalField({ currentTab, color, iterationsNumber, selectedKochFractal
     //тут треба буде міняти. Решту - використовувати.
     // Загалом якось так) Формат зображень я не дуже знаю, який потрібно, тому сам вибереш
 
-   return (
-    <Box
-      sx={{
-        paddingTop: 10,
-        paddingLeft: 40,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
 
-    <KochFractal iterations={iterationsNumber} color={color} selectedKochFractal={selectedKochFractal}/>
+  if (currentTab == "koch") {
+    return (
+      <Box
+        sx={{
+          paddingTop: 10,
+          paddingLeft: 40,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
 
+        <KochFractal iterations={iterationsNumber} color={color} selectedKochFractal={selectedKochFractal} />
 
-      {/* <img src={savedImage} width="80%" alt="Fractal image" /> */}
-    </Box>
-  );
+        {/* <img src={savedImage} width="80%" alt="Fractal image" /> */}
+      </Box>
+    );
+  }
+  else if(currentTab == "mandelbrot"){
+    return (
+      <Box
+        sx={{
+          paddingTop: 10,
+          paddingLeft: 40,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+
+        
+
+        {/* <img src={savedImage} width="80%" alt="Fractal image" /> */}
+      </Box>
+    );
+  }
 }
 
 export default FractalField;

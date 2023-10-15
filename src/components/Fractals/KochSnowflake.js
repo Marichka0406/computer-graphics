@@ -47,9 +47,13 @@ class KochSnowflake extends Component {
       let rand1 = 1;
       let rand2 = 1;
 
+      let inverted = 1;
+
       if(selectedKochFractal == "randomized"){
         rand1 = Math.random()  * (1 - 0.1) + 0.1; 
         rand2 = Math.random()  * (1 - 0.1) + 0.1;
+      } else if(selectedKochFractal == "inverted"){
+        inverted = -1;
       }
 
       // Calculate new points
@@ -58,8 +62,8 @@ class KochSnowflake extends Component {
         y: p1.y + rand2 * (p2.y - p1.y) / 3,
       };
       const p4 = {
-        x: p1.x + rand1 * (p2.x - p1.x) / 2 + (p2.y - p1.y) * (Math.sqrt(3) / 6),
-        y: p1.y + rand2 * (p2.y - p1.y) / 2 - (p2.x - p1.x) * (Math.sqrt(3) / 6),
+        x: p1.x + rand1 * (p2.x - p1.x) / 2 + inverted * (p2.y - p1.y) * (Math.sqrt(3) / 6),
+        y: p1.y + rand2 * (p2.y - p1.y) / 2 - inverted * (p2.x - p1.x) * (Math.sqrt(3) / 6),
       };
       const p5 = {
         x: p1.x + rand1 * (p2.x - p1.x) * 2 / 3,
