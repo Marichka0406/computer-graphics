@@ -16,13 +16,14 @@ function FractalsMenu({
   setIterationsNumber,
   selectedKochFractal,
   setKochFractal,
+  exponent,
+  setExponent,
   savedImage, 
 }) {
 
   const isSmallScreen = useMediaQuery("(max-width:700px)");
 
   const hadleImageSaving = () => { //ось подія збереження
-  console.log("Saved");
   };
 
   const handleNumberChange = (event) => {
@@ -33,6 +34,9 @@ function FractalsMenu({
   };
   const handleFractalSelect = () => {
     setCurrentTab(currentTab === "koch" ? "mandelbrot" : "koch");
+  };
+  const handleExponentChange = (event) => {
+    setExponent(event.target.value);  
   };
 
   return (
@@ -81,24 +85,73 @@ function FractalsMenu({
       >
         {currentTab === "koch" ? "Mandelbrot Set" : "Koch Fractal"}
       </Button>
+
+      
       <Typography sx={{ marginBottom: 1, textAlign: "center", fontSize: "14" }}>
         Number of iterations
       </Typography>
-      <TextField
-        type="number"
-        label="Enter number"
-        inputProps={{
-          min: 1,
-          max: 7,
-        }}
-        sx={{
-          backgroundColor: "white",
-          color: "black",
-          margin: 1,
-        }}
-        value={iterationsNumber}
-        onChange={handleNumberChange}
-      />
+
+      {currentTab === "koch" && (
+        <TextField
+          type="number"
+          label="Enter number"
+          inputProps={{
+            min: 1,
+            max: 7,
+          }}
+          sx={{
+            backgroundColor: "white",
+            color: "black",
+            margin: 1,
+          }}
+          value={iterationsNumber}
+          onChange={handleNumberChange}
+        />
+      )}
+
+      {/*Mandelbrot*/}
+      {currentTab === "mandelbrot" && (
+        <TextField
+          type="number"
+          label="Enter number"
+          inputProps={{
+            min: 1,
+            max: 1000,
+          }}
+          sx={{
+            backgroundColor: "white",
+            color: "black",
+            margin: 1,
+          }}
+          value={iterationsNumber}
+          onChange={handleNumberChange}
+        />
+      )}
+
+      {currentTab === "mandelbrot" && (
+        <Typography sx={{ marginBottom: 1, textAlign: "center", fontSize: "14" }}>
+          Exponent N
+        </Typography>
+      )}
+
+      {currentTab === "mandelbrot" && (
+        <TextField
+          type="number"
+          label="Enter exponent"
+          inputProps={{
+            min: 2,
+            max: 10,
+          }}
+          sx={{
+            backgroundColor: "white",
+            color: "black",
+            margin: 1,
+          }}
+          value={exponent}
+          onChange={handleExponentChange}
+        />
+      )}
+
       {currentTab === "koch" && (
         <RadioButtons
           selectedKochFractal={selectedKochFractal}

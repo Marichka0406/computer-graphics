@@ -10,9 +10,10 @@ function Fractals() {
   const [iterationsNumber, setIterationsNumber] = useState(0); 
   const [selectedKochFractal, setKochFractal] = useState("island");
   const [savedImage, setSavedImage] = useState(kochImage);
+  const [exponent, setExponent] = useState(2);
 
   useEffect(() => {
-    setSelectedColor("#000000");
+    setSelectedColor("rgb(0, 0, 0)");
     setIterationsNumber(0);
     setKochFractal("island");
   }, [currentTab]);
@@ -32,6 +33,8 @@ function Fractals() {
         setIterationsNumber={setIterationsNumber}
         selectedKochFractal={selectedKochFractal}
         setKochFractal={setKochFractal}
+        exponent={exponent}
+        setExponent={setExponent}
         savedImage={savedImage}
       />
       <FractalField
@@ -39,6 +42,7 @@ function Fractals() {
         color={color}
         iterationsNumber={iterationsNumber}
         selectedKochFractal={selectedKochFractal}
+        exponent={exponent}
         savedImage={savedImage}
         setSavedImage={setSavedImage}
       />

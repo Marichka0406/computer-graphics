@@ -84,8 +84,6 @@ class KochSnowflake extends Component {
         prevProps.color !== this.props.color ||
         prevProps.selectedKochFractal !== this.props.selectedKochFractal
     ) {
-        console.log(this.props.selectedKochFractal)
-
         const canvas = this.refs.canvas;
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
