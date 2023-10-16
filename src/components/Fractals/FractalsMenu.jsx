@@ -79,7 +79,7 @@ function FractalsMenu({
         }}
         onClick={hadleImageSaving}
       >
-        Save as ...
+        Save
       </Button>
       <Button
         onClick={handleFractalSelect}
