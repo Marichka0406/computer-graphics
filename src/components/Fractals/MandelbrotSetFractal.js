@@ -135,7 +135,7 @@ getGradientColor(iterations, maxIterations, baseColor) {
   }
 
   render() {
-    return <canvas ref="canvas" width={this.state.width} height={this.state.height}></canvas>;
+    return <canvas id="canva" ref="canvas" width={this.state.width} height={this.state.height}></canvas>;
   }
 }
 

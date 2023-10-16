@@ -23,7 +23,16 @@ function FractalsMenu({
 
   const isSmallScreen = useMediaQuery("(max-width:700px)");
 
-  const hadleImageSaving = () => { //ось подія збереження
+  const hadleImageSaving = () => {
+    //ось подія збереження
+    let canva = document.getElementById("canva");
+    let canvasUrl = canva.toDataURL("image/jpeg", 0.5);
+    console.log(canvasUrl);
+    const createEl = document.createElement('a');
+    createEl.href = canvasUrl;
+    createEl.download = "download-this-canvas";
+    createEl.click();
+    createEl.remove();
   };
 
   const handleNumberChange = (event) => {
