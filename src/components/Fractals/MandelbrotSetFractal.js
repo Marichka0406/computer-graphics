@@ -8,7 +8,7 @@ class MandelbrotSet extends Component {
       height: 600,
       exponent: props.exponent || 2, // Exponent
       maxIterations: props.iterations || 0, // Maximum number of iterations
-      color: props.color || "rgb(0, 0, 0)",
+      color: props.color || "rgb(255, 255, 255)",
     };
   }
 
@@ -87,7 +87,6 @@ getGradientColor(iterations, maxIterations, baseColor) {
     if(0 == maxIterations) {
        return `rgb(${0},${0},${0})`
     }
-    //const baseRgb = this.hexToRgb(baseColor);
 
     const match = baseColor.match(/rgb\((\d+), (\d+), (\d+)\)/);
 

@@ -13,7 +13,7 @@ function Fractals() {
   const [exponent, setExponent] = useState(2);
 
   useEffect(() => {
-    setSelectedColor("rgb(0, 0, 0)");
+    setSelectedColor("rgb(255, 255, 255)");
     setIterationsNumber(0);
     setKochFractal("island");
   }, [currentTab]);

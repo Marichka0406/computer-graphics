@@ -33,6 +33,8 @@ function FractalsMenu({
     setSelectedColor(color);
   };
   const handleFractalSelect = () => {
+    setIterationsNumber(0);
+    setExponent(2);
     setCurrentTab(currentTab === "koch" ? "mandelbrot" : "koch");
   };
   const handleExponentChange = (event) => {
