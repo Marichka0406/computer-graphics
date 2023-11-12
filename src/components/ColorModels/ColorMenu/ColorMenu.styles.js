@@ -2,7 +2,7 @@ export const menuStyles = {
   wrapper: {
     display: "flex",
     flexDirection: "column",
-    gap: "10px",
+    gap: "4px",
     pt: 11,
     px: 1,
     '@media (min-width: 600px)': {
@@ -20,7 +20,6 @@ export const menuStyles = {
       backgroundColor: "rgba(40, 42, 69, 1)",
     },
     padding: 2,
-    borderRadius: 0,
     mb: 1,
     borderRadius: "3%",
     boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
@@ -61,6 +60,6 @@ export const menuStyles = {
   },
   brightnessSlider: {
     width: "88%",
-    marginBottom:"16px"
+    marginBottom:"5px"
   },
 };

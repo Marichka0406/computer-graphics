@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { canvasStyles } from "./ImageCanvas.styles";
 import { Box } from "@mui/material";
 

@@ -54,6 +54,19 @@ const ImageColorChanger = () => {
     setImage(image);
   };
 
+  const handleReset = () => {
+    setRed(0);
+    setGreen(0);
+    setBlue(0);
+    setBrightness(0);
+    setR(0);
+    setB(0);
+    setG(0);
+    setX(0);
+    setY(0);
+    setZ(0);
+  };
+
   const rgbToXyz = (r, g, b) => {
     let var_R = r / 255;
     let var_G = g / 255;
@@ -101,6 +114,7 @@ const ImageColorChanger = () => {
         rgbValue={`${r}, ${g}, ${b}`}
         xyzValues={`${x}, ${y}, ${z}`}
         onFileChange={handleFileChange}
+        onReset={handleReset}
         img={img}
         canvasRef={canvasRef}
       />

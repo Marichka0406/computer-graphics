@@ -19,6 +19,7 @@ const ColorMenu = ({
   img,
   onFileChange,
   canvasRef,
+  onReset
 }) => {
   const [x, y, z] = xyzValues.split(", ");
 
@@ -60,6 +61,18 @@ const ColorMenu = ({
       <Button sx={menuStyles.button} onClick={handleSaveAs}>
         Save as ...
       </Button>
+      <Box>
+        <Typography sx={menuStyles.title}>Brightness</Typography>
+        <input
+          type="range"
+          min="-100"
+          max="100"
+          value={brightness}
+          onChange={(e) => onBrightnessChange(Number(e.target.value))}
+          style={menuStyles.brightnessSlider}
+        />
+        {brightness}
+      </Box>
       <Box>
         <Typography sx={menuStyles.title}>Color</Typography>
         <Box>
@@ -119,19 +132,10 @@ const ColorMenu = ({
         <Box sx={menuStyles.xyzWrapper}>
           <Typography>Z: {z}</Typography>
         </Box>
-      </Box>
-      <Box>
-        <Typography sx={menuStyles.title}>Brightness</Typography>
-        <input
-          type="range"
-          min="-100"
-          max="100"
-          value={brightness}
-          onChange={(e) => onBrightnessChange(Number(e.target.value))}
-          style={menuStyles.brightnessSlider}
-        />
-        {brightness}
-      </Box>
+      </Box> 
+      <Button sx={menuStyles.button} onClick={onReset}>
+        Reset
+      </Button>    
     </Box>
   );
 };
