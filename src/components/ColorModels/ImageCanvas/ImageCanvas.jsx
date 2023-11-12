@@ -42,7 +42,7 @@ const ImageCanvas = ({
 
       canvas.height = image.height / k;
       canvas.width = image.width / k;
-      
+
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
       canvas.addEventListener("mousemove", handleMouseMove);
