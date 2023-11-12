@@ -2,8 +2,8 @@ export const menuStyles = {
   wrapper: {
     display: "flex",
     flexDirection: "column",
-    gap: "4px",
-    pt: 11,
+    gap: "3px",
+    pt: 9,
     px: 1,
     '@media (min-width: 600px)': {
         width: "40%"
@@ -44,7 +44,7 @@ export const menuStyles = {
     margin: "2px 2px 2px 16px",
   },
   title: {
-    marginBottom: "2px",
+    marginBottom: "1px",
     textAlign: "center",
     fontSize: "14",
   },
@@ -60,6 +60,5 @@ export const menuStyles = {
   },
   brightnessSlider: {
     width: "88%",
-    marginBottom:"5px"
   },
 };
