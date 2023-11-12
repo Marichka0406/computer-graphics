@@ -57,10 +57,10 @@ class KochSnowflake extends Component {
 
       let inverted = 1;
 
-      if (selectedKochFractal == "randomized") {
+      if (selectedKochFractal === "randomized") {
         rand1 = Math.random() * (1 - 0.1) + 0.1;
         rand2 = Math.random() * (1 - 0.1) + 0.1;
-      } else if (selectedKochFractal == "inverted") {
+      } else if (selectedKochFractal === "inverted") {
         inverted = -1;
       }
 

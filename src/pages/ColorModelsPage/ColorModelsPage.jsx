@@ -1,11 +1,11 @@
 import NavBar from "../../components/NavBar/NavBar";
-import Test from "../../components/ColorModels/test.jsx";
+import ColorModels from "../../components/ColorModels/ColorModels";
 
 function ColorModelsPage() {
   return (
     <>
       <NavBar />
-      <Test />
+      <ColorModels />
     </>
   );
 }

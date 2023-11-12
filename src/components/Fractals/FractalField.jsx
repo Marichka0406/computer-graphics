@@ -3,12 +3,12 @@ import { Box } from "@mui/material";
 import KochFractal from "./KochSnowflake"
 import MandelbrotSet from "./MandelbrotSetFractal";
 
-function FractalField({ currentTab, color, iterationsNumber, selectedKochFractal, exponent, savedImage, setSavedImage}) {
+function FractalField({ currentTab, color, iterationsNumber, selectedKochFractal, exponent}) {
     //savedImage і setSavedImage потрібно встановлювати кожен раз коли аимальовується нова картинка, тобто тоді, коли вона міняється, тому ці пропси 
     //тут треба буде міняти. Решту - використовувати.
     // Загалом якось так) Формат зображень я не дуже знаю, який потрібно, тому сам вибереш
     
-  if (currentTab == "koch") {
+  if (currentTab === "koch") {
     return (
       <Box
         sx={{
@@ -26,7 +26,7 @@ function FractalField({ currentTab, color, iterationsNumber, selectedKochFractal
       </Box>
     );
   }
-  else if(currentTab == "mandelbrot"){
+  else if(currentTab === "mandelbrot"){
     return (
       <Box
         sx={{

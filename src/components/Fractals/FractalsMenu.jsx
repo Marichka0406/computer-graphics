@@ -18,7 +18,6 @@ function FractalsMenu({
   setKochFractal,
   exponent,
   setExponent,
-  savedImage, 
 }) {
 
   const isSmallScreen = useMediaQuery("(max-width:700px)");
@@ -38,14 +37,17 @@ function FractalsMenu({
   const handleNumberChange = (event) => {
     setIterationsNumber(event.target.value);
   };
+
   const handleColorChange = (color) => {
     setSelectedColor(color);
   };
+
   const handleFractalSelect = () => {
     setIterationsNumber(0);
     setExponent(2);
     setCurrentTab(currentTab === "koch" ? "mandelbrot" : "koch");
   };
+
   const handleExponentChange = (event) => {
     setExponent(event.target.value);  
   };
@@ -73,13 +75,12 @@ function FractalsMenu({
             backgroundColor: "rgba(40, 42, 69, 1)",
           },
           padding: 2,
-          borderRadius: 0,
           margin: 1,
           borderRadius: "3%",
         }}
         onClick={hadleImageSaving}
       >
-        Save
+        Save as ...
       </Button>
       <Button
         onClick={handleFractalSelect}

@@ -84,7 +84,7 @@ getGradientColor(iterations, maxIterations, baseColor) {
     // Customizable gradient coloring based on the number of iterations and the base color
     let hue = (iterations / maxIterations) * 360;
 
-    if(0 == maxIterations) {
+    if(0 === maxIterations) {
        return `rgb(${0},${0},${0})`
     }
 
