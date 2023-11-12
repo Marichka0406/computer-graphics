@@ -16,12 +16,50 @@ const ColorMenu = ({
   onBlueChange,
   rgbValue,
   xyzValues,
+  img,
+  onFileChange,
+  canvasRef,
 }) => {
   const [x, y, z] = xyzValues.split(", ");
+
+  const handleImageUpload = () => {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.onchange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          onFileChange(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    fileInput.click();
+  };
+
+  const handleSaveAs = () => {
+    const image = new Image();
+    image.src = img;
+    image.onload = () => {
+      const canvas = canvasRef.current;
+      const a = document.createElement("a");
+      a.download = "download.png";
+      a.href = canvas.toDataURL("image/png");
+      a.click();
+    };
+  };
+
   return (
     <Box sx={menuStyles.wrapper}>
-      <Button sx={menuStyles.button}>Choose file</Button>
-      <Button sx={menuStyles.button}>Save as ...</Button>
+      <Button sx={menuStyles.button} onClick={handleImageUpload}>
+        Choose file
+      </Button>
+      <Button sx={menuStyles.button} onClick={handleSaveAs}>
+        Save as ...
+      </Button>
       <Box>
         <Typography sx={menuStyles.title}>Color</Typography>
         <Box>
@@ -68,7 +106,7 @@ const ColorMenu = ({
       </Box>
       <Box>
         <Typography sx={menuStyles.title}>RGB</Typography>
-        <MuiColorInput sx={menuStyles.input} value={`rgb(${rgbValue})`} />
+        <MuiColorInput sx={menuStyles.input} value={`rgb(${rgbValue})`} disabled={true}/>
       </Box>
       <Box>
         <Typography sx={menuStyles.title}>XYZ</Typography>

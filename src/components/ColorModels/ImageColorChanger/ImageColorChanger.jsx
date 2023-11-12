@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import ColorMenu from "../ColorMenu/ColorMenu";
 import ImageCanvas from "../ImageCanvas/ImageCanvas";
-import img from "../cat_rainbow.jpg";
+import catRainbowImg from "../cat_rainbow.jpg";
 import { styles } from "./ImageColorChanger.styles";
 
 const ImageColorChanger = () => {
+  const [img, setImage] = useState(catRainbowImg);
+  const canvasRef = useRef(null);
+
   const [red, setRed] = useState(0);
   const [green, setGreen] = useState(0);
   const [blue, setBlue] = useState(0);
@@ -45,6 +48,10 @@ const ImageColorChanger = () => {
     setX(xyz.x);
     setY(xyz.y);
     setZ(xyz.z);
+  };
+
+  const handleFileChange = (image) => {
+    setImage(image);
   };
 
   const rgbToXyz = (r, g, b) => {
@@ -93,6 +100,9 @@ const ImageColorChanger = () => {
         onBlueChange={handleBlueChange}
         rgbValue={`${r}, ${g}, ${b}`}
         xyzValues={`${x}, ${y}, ${z}`}
+        onFileChange={handleFileChange}
+        img={img}
+        canvasRef={canvasRef}
       />
       <ImageCanvas
         img={img}
@@ -101,6 +111,7 @@ const ImageColorChanger = () => {
         green={green}
         blue={blue}
         onColorChange={handleColorChange}
+        canvasRef={canvasRef}
       />
     </Box>
   );

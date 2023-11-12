@@ -2,9 +2,15 @@ import React, { useEffect, useRef } from "react";
 import { canvasStyles } from "./ImageCanvas.styles";
 import { Box } from "@mui/material";
 
-const ImageCanvas = ({ img, brightness, red, green, blue, onColorChange }) => {
-  const canvasRef = useRef(null);
-
+const ImageCanvas = ({
+  img,
+  brightness,
+  red,
+  green,
+  blue,
+  onColorChange,
+  canvasRef,
+}) => {
   useEffect(() => {
     const image = new Image();
     image.src = img;
@@ -47,12 +53,13 @@ const ImageCanvas = ({ img, brightness, red, green, blue, onColorChange }) => {
     return () => {
       canvas.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [img, brightness, red, green, blue, onColorChange]);
+  }, [img, brightness, red, green, blue, onColorChange, canvasRef]);
 
-  return(
-  <Box sx={canvasStyles.imageWrapper}>
-    <canvas ref={canvasRef} style={canvasStyles.canvas}></canvas>
-  </Box>);
+  return (
+    <Box sx={canvasStyles.imageWrapper}>
+      <canvas ref={canvasRef} style={canvasStyles.canvas}></canvas>
+    </Box>
+  );
 };
 
 export default ImageCanvas;

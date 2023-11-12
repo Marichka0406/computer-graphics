@@ -3,7 +3,6 @@ export const canvasStyles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop:"5px"
   },
   canvas:{
     width:"60%",
