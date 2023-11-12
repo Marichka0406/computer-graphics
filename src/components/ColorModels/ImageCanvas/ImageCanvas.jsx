@@ -15,6 +15,8 @@ const ImageCanvas = ({
     const image = new Image();
     image.src = img;
 
+    const MAX_IMAGE_HEIGHT = 770;
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -36,8 +38,11 @@ const ImageCanvas = ({
     };
     
     image.onload = () => {
-      canvas.width = image.width;
-      canvas.height = image.height;
+      let k = (image.height / MAX_IMAGE_HEIGHT);
+
+      canvas.height = image.height / k;
+      canvas.width = image.width / k;
+      
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
       canvas.addEventListener("mousemove", handleMouseMove);
