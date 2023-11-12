@@ -15,7 +15,7 @@ const ImageCanvas = ({
     const image = new Image();
     image.src = img;
 
-    const MAX_IMAGE_HEIGHT = 770;
+    const MAX_IMAGE_HEIGHT = 600;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
