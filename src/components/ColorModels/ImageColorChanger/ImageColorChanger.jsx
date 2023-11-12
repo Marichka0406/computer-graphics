@@ -12,7 +12,7 @@ const ImageColorChanger = () => {
   const [red, setRed] = useState(0);
   const [green, setGreen] = useState(0);
   const [blue, setBlue] = useState(0);
-  const [brightness, setBrightness] = useState(100);
+  const [brightness, setBrightness] = useState(0);
 
   const [r, setR] = useState(0);
   const [g, setG] = useState(0);

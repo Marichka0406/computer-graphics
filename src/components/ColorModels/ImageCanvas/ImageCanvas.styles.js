@@ -3,10 +3,11 @@ export const canvasStyles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: "100px",
   },
   canvas:{
-    width:"60%",
-    height:"70%",   
+    width: "auto",//"100%",
+    height: "auto"//"100%",   
   },
   
 };

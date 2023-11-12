@@ -124,8 +124,8 @@ const ColorMenu = ({
         <Typography sx={menuStyles.title}>Brightness</Typography>
         <input
           type="range"
-          min="0"
-          max="300"
+          min="-100"
+          max="100"
           value={brightness}
           onChange={(e) => onBrightnessChange(Number(e.target.value))}
           style={menuStyles.brightnessSlider}

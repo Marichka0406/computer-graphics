@@ -27,14 +27,25 @@ const ImageCanvas = ({
       onColorChange(pixel[0], pixel[1], pixel[2]);
     };
 
+    const applyBrightness = (data, brightness) => {
+      for (var i = 0; i < data.length; i+= 4) {
+        data[i] += 255 * (brightness / 100);
+        data[i+1] += 255 * (brightness / 100);
+        data[i+2] += 255 * (brightness / 100);
+      }
+    };
+    
     image.onload = () => {
       canvas.width = image.width;
       canvas.height = image.height;
-      canvas.style.filter = `brightness(${brightness}%)`;
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
       canvas.addEventListener("mousemove", handleMouseMove);
       updateImageColor();
+
+      let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      applyBrightness(imageData.data, brightness);
+      ctx.putImageData(imageData, 0, 0);
     };
 
     const updateImageColor = () => {
