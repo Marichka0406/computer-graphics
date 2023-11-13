@@ -57,9 +57,8 @@ function FractalsMenu({
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-around",
         paddingTop: 12,
-        height: "100%",
+        height: "auto",
         backgroundColor: "rgba(241, 243, 255, 1)",
         width: isSmallScreen ? "45%" : "21%",
       }}
