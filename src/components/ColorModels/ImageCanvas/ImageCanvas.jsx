@@ -4,6 +4,10 @@ import { Box } from "@mui/material";
 
 const ImageCanvas = ({
   img,
+  posX,
+  posY,
+  sizeWidth,
+  sizeHeight,
   brightness,
   red,
   green,
@@ -49,12 +53,12 @@ const ImageCanvas = ({
       updateImageColor();
 
       let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      applyBrightness(imageData.data, brightness);
+      
       ctx.putImageData(imageData, 0, 0);
     };
 
     const updateImageColor = () => {
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const imageData = ctx.getImageData(posX, posY, sizeWidth, sizeHeight);
       const data = imageData.data;
 
       for (let i = 0; i < data.length; i += 4) {
@@ -63,13 +67,15 @@ const ImageCanvas = ({
         data[i + 2] += blue;
       }
 
-      ctx.putImageData(imageData, 0, 0);
+      applyBrightness(imageData.data, brightness);
+
+      ctx.putImageData(imageData, posX, posY);
     };
 
     return () => {
       canvas.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [img, brightness, red, green, blue, onColorChange, canvasRef]);
+  }, [img, posX, posY, sizeHeight, sizeWidth, brightness, red, green, blue, onColorChange, canvasRef]);
 
   return (
     <Box sx={canvasStyles.imageWrapper}>

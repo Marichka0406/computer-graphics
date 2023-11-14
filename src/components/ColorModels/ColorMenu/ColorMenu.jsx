@@ -4,8 +4,17 @@ import { MuiColorInput } from "mui-color-input";
 import { menuStyles } from "./ColorMenu.styles.js";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
+import TextField from "@mui/material/TextField";
 
 const ColorMenu = ({
+  posX,
+  posY,
+  sizeWidth,
+  sizeHeight,
+  handlePosXChange,
+  handlePosYChange,
+  handleSizeWidthChange,
+  handleSizeHeightChange,
   brightness,
   red,
   green,
@@ -22,6 +31,22 @@ const ColorMenu = ({
   onReset
 }) => {
   const [x, y, z] = xyzValues.split(", ");
+
+  const onPosXChange = (event) => {
+    handlePosXChange(event.target.value);
+  };
+
+  const onPosYChange = (event) => {
+    handlePosYChange(event.target.value);
+  };
+
+  const onSizeWidthChange = (event) => {
+    handleSizeWidthChange(event.target.value);
+  };
+  
+  const onSizeHeightChange = (event) => {
+    handleSizeHeightChange(event.target.value);
+  };
 
   const handleImageUpload = () => {
     const fileInput = document.createElement("input");
@@ -61,6 +86,73 @@ const ColorMenu = ({
       <Button sx={menuStyles.button} onClick={handleSaveAs}>
         Save as ...
       </Button>
+
+      <Box>
+        <TextField
+          type="number"
+          label="Enter X"
+          inputProps={{
+            min: 0,
+            max: 10000,
+          }}
+          sx={{
+            backgroundColor: "white",
+            color: "black",
+            margin: 1,
+          }}
+          value={posX}
+          onChange={onPosXChange}
+        />
+        <TextField
+          type="number"
+          label="Enter Y"
+          inputProps={{
+            min: 0,
+            max: 10000,
+          }}
+          sx={{
+            backgroundColor: "white",
+            color: "black",
+            margin: 1,
+          }}
+          value={posY}
+          onChange={onPosYChange}
+        />
+      </Box>
+      
+      <Box>
+        <TextField
+          type="number"
+          label="Enter Width"
+          inputProps={{
+            min: 1,
+            max: 10000,
+          }}
+          sx={{
+            backgroundColor: "white",
+            color: "black",
+            margin: 1,
+          }}
+          value={sizeWidth}
+          onChange={onSizeWidthChange}
+        />
+        <TextField
+          type="number"
+          label="Enter Height"
+          inputProps={{
+            min: 1,
+            max: 10000,
+          }}
+          sx={{
+            backgroundColor: "white",
+            color: "black",
+            margin: 1,
+          }}
+          value={sizeHeight}
+          onChange={onSizeHeightChange}
+        />
+      </Box>
+
       <Box>
         <Typography sx={menuStyles.title}>Brightness</Typography>
         <input

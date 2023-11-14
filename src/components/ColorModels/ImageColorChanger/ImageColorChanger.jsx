@@ -9,6 +9,12 @@ const ImageColorChanger = () => {
   const [img, setImage] = useState(catRainbowImg);
   const canvasRef = useRef(null);
 
+  const [posX, setPosX] = useState(0);
+  const [posY, setPosY] = useState(0);
+
+  const [sizeWidth, setSizeWidth] = useState(600);
+  const [sizeHeight, setSizeHeight] = useState(600);
+
   const [red, setRed] = useState(0);
   const [green, setGreen] = useState(0);
   const [blue, setBlue] = useState(0);
@@ -21,6 +27,22 @@ const ImageColorChanger = () => {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [z, setZ] = useState(0);
+
+  const handleSizeWidthChange = (value) => {
+    setSizeWidth(value);
+  };
+
+  const handleSizeHeightChange = (value) => {
+    setSizeHeight(value);
+  };
+
+  const handlePosXChange = (value) => {
+    setPosX(value);
+  };
+
+  const handlePosYChange = (value) => {
+    setPosY(value);
+  };
 
   const handleBrightnessChange = (value) => {
     setBrightness(value);
@@ -55,6 +77,11 @@ const ImageColorChanger = () => {
   };
 
   const handleReset = () => {
+    setPosX(0);
+    setPosY(0);
+    setSizeWidth(0);
+    setSizeHeight(0);
+
     setRed(0);
     setGreen(0);
     setBlue(0);
@@ -103,6 +130,15 @@ const ImageColorChanger = () => {
   return (
     <Box sx={styles.wrapper}>
       <ColorMenu
+        posX={posX}
+        posY={posY}
+        sizeWidth={sizeWidth}
+        sizeHeight={sizeHeight}
+        handlePosXChange={handlePosXChange}
+        handlePosYChange={handlePosYChange}
+        handleSizeWidthChange={handleSizeWidthChange}
+        handleSizeHeightChange={handleSizeHeightChange}
+
         brightness={brightness}
         red={red}
         green={green}
@@ -120,6 +156,10 @@ const ImageColorChanger = () => {
       />
       <ImageCanvas
         img={img}
+        posX={posX}
+        posY={posY}
+        sizeWidth={sizeWidth}
+        sizeHeight={sizeHeight}
         brightness={brightness}
         red={red}
         green={green}
