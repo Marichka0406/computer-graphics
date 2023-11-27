@@ -1,6 +1,6 @@
 import NavBar from "../../components/NavBar/NavBar";
 
-function StudyMaterialsPage() {
+function StudyMaterialsTestsPage() {
   return (
     <>
       <NavBar />
@@ -8,4 +8,4 @@ function StudyMaterialsPage() {
   );
 }
 
-export default StudyMaterialsPage;
+export default StudyMaterialsTestsPage;

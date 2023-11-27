@@ -26,7 +26,7 @@ const paths = [
   "/fractals",
   "/color-models",
   "/moving-images",
-  "/study-materials",
+  "/study-materials-lessons",
 ];
 
 function NavBar(props) {
