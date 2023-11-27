@@ -168,7 +168,7 @@ const TrapezoidMenu = ({
               }}
               sx={menuStyles.input}
             >
-              {points.name.map((name, index) => (
+              {points.name.slice(0, -1).map((name, index) => (
                 <MenuItem key={index} value={index}>
                   {name}
                 </MenuItem>
