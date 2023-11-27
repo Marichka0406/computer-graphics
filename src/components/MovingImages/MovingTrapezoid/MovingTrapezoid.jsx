@@ -37,6 +37,13 @@ const MovingTrapezoid = () => {
 
   // Функція для створення матриці трансформації для масштабування та повороту
   function getTransformationMatrix(centerX, centerY, scale, angleInDegrees) {
+    if('0' === scale || 0 === scale) {
+      return [
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1],
+      ];
+    }
     // Перетворення кута в радіани
     const angleInRadians = angleInDegrees * (Math.PI / 180);
 
