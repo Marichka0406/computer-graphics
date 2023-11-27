@@ -1,13 +1,13 @@
 import NavBar from "../../components/NavBar/NavBar";
-import Test from "../../components/MovingImages/test";
+import MovingTrapezoid from "../../components/MovingImages/MovingTrapezoid/MovingTrapezoid";
 
 function MovingImagesPage() {
   return (
     <>
       <NavBar />
-      <Test />
+      <MovingTrapezoid />
     </>
   );
 }
 
-export default  MovingImagesPage;
+export default MovingImagesPage;
