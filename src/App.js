@@ -3,7 +3,8 @@ import HomePage from './pages/HomePage/HomePage';
 import FractalsPage from './pages/FractalsPage/FractalsPage';
 import ColorModelsPage from './pages/ColorModelsPage/ColorModelsPage';
 import MovingImagesPage from './pages/MovingImagesPage/MovingImagesPage';
-import StudyMaterialsPage from './pages/StudyMaterialsPage/StudyMaterialsPage'
+import StudyMaterialsLessonsPage from './pages/StudyMaterialsPage/StudyMaterialsLessonsPage'
+import StudyMaterialsTestsPage from './pages/StudyMaterialsPage/StudyMaterialsTestsPage.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
       <Route path="fractals" element={<FractalsPage />} />
       <Route path="color-models" element={<ColorModelsPage />} />
       <Route path="moving-images" element={<MovingImagesPage />} />
-      <Route path="study-materials" element={<StudyMaterialsPage />} />
+      <Route path="study-materials-lessons" element={<StudyMaterialsLessonsPage />} />
+      <Route path="study-materials-tests" element={<StudyMaterialsTestsPage />} />
     </Routes>
     </BrowserRouter>
   );
