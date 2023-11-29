@@ -47,34 +47,34 @@ const MovingTrapezoid = () => {
     // Перетворення кута в радіани
     const angleInRadians = angleInDegrees * (Math.PI / 180);
 
-    let cos = Math.round(Math.cos(-angleInRadians) * 1000) / 1000;
-    let sin = Math.round(Math.sin(-angleInRadians) * 1000) / 1000;
+    let cos = Math.round(Math.cos(angleInRadians) * 1000) / 1000;
+    let sin = Math.round(Math.sin(angleInRadians) * 1000) / 1000;
 
     // Матриця трансформації для здійснення повороту відносно точки
     const rotationMatrix = [
-      [cos, -sin, 0],
-      [sin, cos, 0],
+      [cos, sin, 0],
+      [-sin, cos, 0],
       [0, 0, 1],
     ];
 
     const scalingMatrix = [
-      [1 / scale, 0, 0],
-      [0, 1 / scale, 0],
+      [scale, 0, 0],
+      [0, scale, 0],
       [0, 0, 1],
     ];
 
     // Матриця трансформації для зміщення точки в центрі обертання
     const translationMatrixToCenter = [
-      [1, 0, -centerX],
-      [0, 1, -centerY],
-      [0, 0, 1],
+      [1, 0, 0],
+      [0, 1, 0],
+      [centerX, centerY, 1],
     ];
 
     // Матриця трансформації для повернення точки назад на місце
     const translationMatrixFromCenter = [
-      [1, 0, centerX],
-      [0, 1, centerY],
-      [0, 0, 1],
+      [1, 0, 0],
+      [0, 1, 0],
+      [-centerX, -centerY, 1],
     ];
 
     // Порядок застосування матриць: зміщення в центр, масштабування, поворот, зміщення назад
@@ -88,18 +88,31 @@ const MovingTrapezoid = () => {
     return transformationMatrix;
   }
 
-  function getTransformedPoint(matrix, point) {
+
+  function getTransformedPoints(matrix, points) {
     // Додайте третю координату (однорідні координати)
-    const homogeneousPoint = [point.x, point.y, 1];
+    const homogeneousPoints = [
+      [points[0].x, points[0].y, 1],
+      [points[1].x, points[1].y, 1],
+      [points[2].x, points[2].y, 1],
+      [points[3].x, points[3].y, 1],
+      [points[4].x, points[4].y, 1],
+    ];
 
     // Обернена матриця
-    const inverseMatrix = numeric.inv(matrix); // numeric - це бібліотека для операцій з матрицями (потрібно встановити через npm)
+    //const inverseMatrix = numeric.inv(matrix); // numeric - це бібліотека для операцій з матрицями (потрібно встановити через npm)
 
     // Помножте вектор на обернену матрицю
-    const transformedPoint = numeric.dot(inverseMatrix, homogeneousPoint);
+    const transformedPoint = numeric.dot(homogeneousPoints, matrix);
 
     // Поверніть координати точки
-    return { x: transformedPoint[0], y: transformedPoint[1] };
+    return [
+      { x: transformedPoint[0][0], y: transformedPoint[0][1] },
+      { x: transformedPoint[1][0], y: transformedPoint[1][1] },
+      { x: transformedPoint[2][0], y: transformedPoint[2][1] },
+      { x: transformedPoint[3][0], y: transformedPoint[3][1] },
+      { x: transformedPoint[4][0], y: transformedPoint[4][1] },
+  ];
   }
 
   // Функція для множення матриць
@@ -132,28 +145,33 @@ const MovingTrapezoid = () => {
   };
 
   const handleTransformOnClick = () => {
-    // Point for rotation
-    const x0 = points.x[rotationPoint];
-    const y0 = points.y[rotationPoint];
+   // Point for rotation
+   const x0 = points.x[rotationPoint];
+   const y0 = points.y[rotationPoint];
 
-    let transformedPoint;
+   let transformedPoints = getTransformedPoints(
+     getTransformationMatrix(x0, y0, scale, rotateDegree),
+     [
+       { x: points.x[0], y: points.y[0] },
+       { x: points.x[1], y: points.y[1] },
+       { x: points.x[2], y: points.y[2] },
+       { x: points.x[3], y: points.y[3] },
+       { x: points.x[4], y: points.y[4] },
+   ]
+   );
 
-    for (let i = 0; i < points.x.length && i < points.y.length; ++i) {
-      transformedPoint = getTransformedPoint(
-        getTransformationMatrix(x0, y0, scale, rotateDegree),
-        { x: points.x[i], y: points.y[i] }
-      );
-      points.x[i] = transformedPoint.x;
-      points.y[i] = transformedPoint.y;
-    }
+   for(let i = 0; i < transformedPoints.length; ++i){
+     points.x[i] = transformedPoints[i].x;
+     points.y[i] = transformedPoints[i].y;
+   }
 
-    const updatedPoints = {
-      x: [...points.x],
-      y: [...points.y],
-      name: [...points.name],
-    };
+   const updatedPoints = {
+     x: [...points.x],
+     y: [...points.y],
+     name: [...points.name],
+   };
 
-    setPoints(updatedPoints);
+   setPoints(updatedPoints);
   };
 
   const handleRotatePointChange = (val) => {
