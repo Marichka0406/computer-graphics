@@ -80,14 +80,15 @@ const ColorMenu = ({
 
   return (
     <Box sx={menuStyles.wrapper}>
+      <Box sx={menuStyles.buttonsWrapper}>
       <Button sx={menuStyles.button} onClick={handleImageUpload}>
         Choose file
       </Button>
       <Button sx={menuStyles.button} onClick={handleSaveAs}>
         Save as ...
       </Button>
-
-      <Box>
+      </Box>
+      <Box sx={menuStyles.inputsWrapper}>
         <TextField
           type="number"
           label="Enter X"
@@ -98,7 +99,6 @@ const ColorMenu = ({
           sx={{
             backgroundColor: "white",
             color: "black",
-            margin: 1,
           }}
           value={posX}
           onChange={onPosXChange}
@@ -113,14 +113,13 @@ const ColorMenu = ({
           sx={{
             backgroundColor: "white",
             color: "black",
-            margin: 1,
           }}
           value={posY}
           onChange={onPosYChange}
         />
       </Box>
       
-      <Box>
+      <Box sx={menuStyles.inputsWrapper}>
         <TextField
           type="number"
           label="Enter Width"
@@ -131,7 +130,6 @@ const ColorMenu = ({
           sx={{
             backgroundColor: "white",
             color: "black",
-            margin: 1,
           }}
           value={sizeWidth}
           onChange={onSizeWidthChange}
@@ -146,7 +144,6 @@ const ColorMenu = ({
           sx={{
             backgroundColor: "white",
             color: "black",
-            margin: 1,
           }}
           value={sizeHeight}
           onChange={onSizeHeightChange}
