@@ -98,10 +98,7 @@ const MovingTrapezoid = () => {
       [points[3].x, points[3].y, 1],
       [points[4].x, points[4].y, 1],
     ];
-
-    // Обернена матриця
-    //const inverseMatrix = numeric.inv(matrix); // numeric - це бібліотека для операцій з матрицями (потрібно встановити через npm)
-
+    
     // Помножте вектор на обернену матрицю
     const transformedPoint = numeric.dot(homogeneousPoints, matrix);
 
