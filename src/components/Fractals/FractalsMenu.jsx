@@ -58,7 +58,7 @@ function FractalsMenu({
         display: "flex",
         flexDirection: "column",
         paddingTop: 12,
-        height: "auto",
+        height: "735px",
         backgroundColor: "rgba(241, 243, 255, 1)",
         width: isSmallScreen ? "45%" : "21%",
       }}

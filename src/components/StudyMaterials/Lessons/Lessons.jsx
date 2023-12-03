@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
-import { Button } from "@mui/material";
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Link } from "react-router-dom";
 import { styles } from "./Lessons.style.js";
@@ -12,7 +11,7 @@ const lessons = [
   { title: 'Moving Images', link: 'https://youtu.be/15aqFQQVBWU?si=rkPgJX0MvJmvYULp' },
 ];
 
-const Tests = () => {
+const Lessons = () => {
   return (
     <Box sx={styles.wrapper}>
      <Box sx={styles.titleWrapper}>
@@ -34,4 +33,4 @@ const Tests = () => {
   );
 };
 
-export default Tests;
+export default Lessons;
