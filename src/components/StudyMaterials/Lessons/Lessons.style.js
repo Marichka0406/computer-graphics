@@ -38,7 +38,7 @@ export const styles = {
     lessonsWrapper:{
         display:"flex",
         flexDirection:"column",
-        ml:"200px"
+        ml:"140px"
     },
     divider:{
         mt:"80px",
