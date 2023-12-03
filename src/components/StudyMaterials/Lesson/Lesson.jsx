@@ -5,17 +5,25 @@ import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
 import { styles } from "./Lesson.style.js";
 
-const Lesson = ({ title, link }) => {
+const Lesson = ({ title, links }) => {
   return (
     <Box sx = {styles.lessonsWrapper} >
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <PlayArrowIcon sx={styles.icon} />
         <Typography sx = {styles.title} >{title}</Typography>
       </Box>
-      <Box>
-        <Link style ={styles.link} href={link} target="_blank" rel="noopener">
-         {link}
-        </Link>
+      <Box  sx = {styles.links} >
+      {links.map((link, index) => (
+          <Link
+            key={index}
+            style={styles.link}
+            href={link}
+            target="_blank"
+            rel="noopener"
+          >
+            {link}
+          </Link>
+        ))}
       </Box>
     </Box>
   );

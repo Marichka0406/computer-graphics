@@ -1,6 +1,6 @@
 export const styles = { 
     icon:{
-       fontSize:"40px"
+       fontSize:"40px",
     },
     lessonsWrapper:{
       marginLeft:"20px" 
@@ -16,6 +16,11 @@ export const styles = {
             color:'blue'
         }
     },
+    links:{
+        display:"flex",
+        flexDirection:"column",
+        gap:"10px"
+    }
     
 };
   
