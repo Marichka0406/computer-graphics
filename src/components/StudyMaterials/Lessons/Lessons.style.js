@@ -31,6 +31,11 @@ export const styles = {
         justifyContent:"flex-end",
         mr:"30px",
     },
+    buttonPrevWrapper:{
+        display:"flex",
+        justifyContent:"flex-start",
+        ml:"30px",
+    },
     link:{
         textDecoration:"none",
         color: '#fff',

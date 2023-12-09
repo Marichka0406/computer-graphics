@@ -43,7 +43,7 @@ const Lessons = () => {
         ))}
       </Box>
       <Box sx={styles.buttonWrapper}>
-        <Link style={styles.link} to={"/study-materials-tests"}>
+        <Link style={styles.link} to={"/study-materials-tests-fractals"}>
           <Box sx={styles.buttonInner}>Next</Box>
         </Link>
       </Box>
