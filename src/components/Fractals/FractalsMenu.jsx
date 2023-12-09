@@ -127,7 +127,7 @@ function FractalsMenu({
           label="Enter number"
           inputProps={{
             min: 1,
-            max: 1000,
+            max: 100,
           }}
           sx={{
             backgroundColor: "white",
@@ -151,7 +151,7 @@ function FractalsMenu({
           label="Enter exponent"
           inputProps={{
             min: 2,
-            max: 10,
+            max: 15,
           }}
           sx={{
             backgroundColor: "white",

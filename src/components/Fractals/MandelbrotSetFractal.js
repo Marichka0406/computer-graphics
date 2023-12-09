@@ -22,9 +22,6 @@ class MandelbrotSet extends Component {
         prevProps.color !== this.props.color ||
         prevProps.exponent !== this.props.exponent
     ) {
-        console.log(prevProps);
-        console.log(this.props);
-
         const canvas = this.refs.canvas;
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -48,6 +45,9 @@ class MandelbrotSet extends Component {
     const exponent = this.props.exponent;
     const maxIterations = this.props.iterations;
     const mainColor = this.props.color;
+
+    if(maxIterations > 100 | maxIterations < 0) return;
+    if(exponent > 15 || exponent < 2) return;
 
     const canvas = this.refs.canvas;
     const ctx = canvas.getContext('2d');
@@ -88,17 +88,24 @@ getGradientColor(iterations, maxIterations, baseColor) {
        return `rgb(${0},${0},${0})`
     }
 
-    const match = baseColor.match(/rgb\((\d+), (\d+), (\d+)\)/);
+    let match = baseColor.match(/rgb\((\d+), (\d+), (\d+)\)/);
 
-      const r = parseInt(match[1], 10);
-      const g = parseInt(match[2], 10);
-      const b = parseInt(match[3], 10);
+    let r, g, b, a = 1;
+    if(match === null)
+    {
+      match = baseColor.match(/rgba\((\d+), (\d+), (\d+), ([0-9]*[.,]?[0-9]+)\)/);
+      a = parseFloat(match[4]);
+    }
+
+      r = parseInt(match[1], 10);
+      g = parseInt(match[2], 10);
+      b = parseInt(match[3], 10);
 
     const rgbColor = this.hslToRgb(hue / 360, 1, 0.5);
     const red = Math.floor(r * (1 - iterations / maxIterations) + rgbColor.r * iterations / maxIterations);
     const green = Math.floor(g * (1 - iterations / maxIterations) + rgbColor.g * iterations / maxIterations);
     const blue = Math.floor(b * (1 - iterations / maxIterations) + rgbColor.b * iterations / maxIterations);
-    return `rgb(${red},${green},${blue})`;
+    return `rgba(${red},${green},${blue}, ${a})`;
   }
 
   hexToRgb(hex) {
