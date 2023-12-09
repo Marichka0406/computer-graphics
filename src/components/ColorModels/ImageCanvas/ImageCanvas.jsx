@@ -58,6 +58,9 @@ const ImageCanvas = ({
     };
 
     const updateImageColor = () => {
+      if(parseInt(sizeHeight) === 0 || sizeHeight === "0" || sizeHeight === "00") return;
+      if(parseInt(sizeWidth) === 0 || sizeWidth === "0" || sizeWidth === "00") return;
+      
       const imageData = ctx.getImageData(posX, posY, sizeWidth, sizeHeight);
       const data = imageData.data;
 
