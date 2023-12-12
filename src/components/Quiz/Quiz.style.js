@@ -11,7 +11,8 @@ export const styles = {
     },
     buttonsWrapper: {
         display: "inline-flex",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        marginTop:"8px"
     },
     buttonInner:{
         backgroundColor: 'rgba(40, 42, 69, 1)',

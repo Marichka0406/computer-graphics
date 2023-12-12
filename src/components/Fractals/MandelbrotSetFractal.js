@@ -6,26 +6,30 @@ class MandelbrotSet extends Component {
     this.state = {
       width: 800,
       height: 600,
-      exponent: props.exponent || 2, // Exponent
-      maxIterations: props.iterations || 0, // Maximum number of iterations
+      exponent: props.exponent || 2, 
+      maxIterations: props.iterations || 0, 
       color: props.color || "rgb(255, 255, 255)",
     };
   }
 
     componentDidMount() {
+      // Малювання фрактала Мандельброта при завантаженні компоненти
     this.drawMandelbrot();
   }
 
   componentDidUpdate(prevProps) {
+     // Оновлення фрактала при зміні параметрів
     if (
         prevProps.iterations !== this.props.iterations ||
         prevProps.color !== this.props.color ||
         prevProps.exponent !== this.props.exponent
     ) {
+       // Очистка канвасу
         const canvas = this.refs.canvas;
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+         // Отримання нових значень параметрів
         const width = this.state.width;
         const height = this.state.height;
         const iterations = this.props.iterations;
@@ -34,28 +38,30 @@ class MandelbrotSet extends Component {
 
         this.setState({width, height, exponent, iterations, color});
 
+        // Перемалювання фрактала Мандельброта
         this.drawMandelbrot();
         this.render();
     }
 }
 
   drawMandelbrot() {
-    const width = this.state.width;
-    const height = this.state.height;
-    const exponent = this.props.exponent;
-    const maxIterations = this.props.iterations;
-    const mainColor = this.props.color;
+    const width = this.state.width;// Ширина canvas
+    const height = this.state.height;// Висота canvas
+    const exponent = this.props.exponent;// Степінь z фракталу Мандельброта
+    const maxIterations = this.props.iterations;// Максимальна кількість ітерацій
+    const mainColor = this.props.color;// Основний колір фракталу
 
+     // Перевірка обмежень для кількості ітерацій та показника
     if(maxIterations > 100 | maxIterations < 0) return;
     if(exponent > 15 || exponent < 2) return;
 
-    const canvas = this.refs.canvas;
-    const ctx = canvas.getContext('2d');
+    const canvas = this.refs.canvas;// Отримання доступу до canvas
+    const ctx = canvas.getContext('2d');// Отримання контексту малювання 2D
 
     for (let x = 0; x < width; x++) {
       for (let y = 0; y < height; y++) {
-        const zx = (x - width / 2) * 4 / width;
-        const zy = (y - height / 2) * 4 / height;
+        const zx = (x - width / 2) * 4 / width;// Реальна частина комплексного числа
+        const zy = (y - height / 2) * 4 / height;// Уявна частина комплексного числа
 
         let cRe = zx;
         let cIm = zy;
@@ -64,24 +70,22 @@ class MandelbrotSet extends Component {
         for (; i < maxIterations; i++) {
           const re2 = cRe * cRe;
           const im2 = cIm * cIm;
-          if (re2 + im2 > 4) break; // Escape condition
+          if (re2 + im2 > 4) break; 
 
           const newRe = Math.pow(re2 + im2, exponent / 2) * Math.cos(exponent * Math.atan2(cIm, cRe)) + zx;
           const newIm = Math.pow(re2 + im2, exponent / 2) * Math.sin(exponent * Math.atan2(cIm, cRe)) + zy;
           cRe = newRe;
           cIm = newIm;
         }
-
-        // Color the pixel based on the number of iterations
+        // Колірування пікселів на основі кількості ітерацій
         const color = this.getGradientColor(i, maxIterations, mainColor);
         ctx.fillStyle = color;
-        ctx.fillRect(x, y, 1, 1);
+        ctx.fillRect(x, y, 1, 1);// Малювання пікселя
       }
     }
   }
 
 getGradientColor(iterations, maxIterations, baseColor) {
-    // Customizable gradient coloring based on the number of iterations and the base color
     let hue = (iterations / maxIterations) * 360;
 
     if(0 === maxIterations) {
@@ -109,7 +113,6 @@ getGradientColor(iterations, maxIterations, baseColor) {
   }
 
   hexToRgb(hex) {
-    // Convert a hex color code to RGB
     hex = hex.replace(/^#/, '');
     const bigint = parseInt(hex, 16);
     const r = (bigint >> 16) & 255;
@@ -121,7 +124,7 @@ getGradientColor(iterations, maxIterations, baseColor) {
   hslToRgb(h, s, l) {
     let r, g, b;
     if (s === 0) {
-      r = g = b = l; // achromatic
+      r = g = b = l; 
     } else {
       const hue2rgb = (p, q, t) => {
         if (t < 0) t += 1;

@@ -11,7 +11,7 @@ const MovingTrapezoid = () => {
   const [points, setPoints] = useState({
     x: [1, 2, 3, 6, 1],
     y: [1, 3, 3, 1, 1],
-    name: ["Point 1", "Point 2", "Point 3", "Point 4", "Point 1"], //отута поправити треба напевно
+    name: ["Point 1", "Point 2", "Point 3", "Point 4", "Point 1"], 
   });
 
   // Коефіцієнт збільшення
@@ -142,7 +142,7 @@ const MovingTrapezoid = () => {
   };
 
   const handleTransformOnClick = () => {
-   // Point for rotation
+   // Точка, відносно якої робить поворот
    const x0 = points.x[rotationPoint];
    const y0 = points.y[rotationPoint];
 

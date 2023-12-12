@@ -16,6 +16,7 @@ const ImageCanvas = ({
   canvasRef,
 }) => {
   useEffect(() => {
+    // Завантаження зображення під час монтування компоненти та налаштування контексту малювання
     const image = new Image();
     image.src = img;
 
@@ -24,6 +25,7 @@ const ImageCanvas = ({
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
+    // Отримання даних про кольори при наведенні миші
     const handleMouseMove = (e) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -33,6 +35,7 @@ const ImageCanvas = ({
       onColorChange(pixel[0], pixel[1], pixel[2]);
     };
 
+    // Застосування яскравості до зображення
     const applyBrightness = (data, brightness) => {
       for (var i = 0; i < data.length; i+= 4) {
         data[i] += 255 * (brightness / 100);
@@ -44,6 +47,7 @@ const ImageCanvas = ({
     image.onload = () => {
       let k = (image.height / MAX_IMAGE_HEIGHT);
 
+      // Встановлення розмірів канвасу та відображення зображення
       canvas.height = image.height / k;
       canvas.width = image.width / k;
 
@@ -58,6 +62,7 @@ const ImageCanvas = ({
     };
 
     const updateImageColor = () => {
+      // Оновлення кольорів зображення на канвасі
       if(parseInt(sizeHeight) === 0 || sizeHeight === "0" || sizeHeight === "00") return;
       if(parseInt(sizeWidth) === 0 || sizeWidth === "0" || sizeWidth === "00") return;
       
@@ -81,6 +86,7 @@ const ImageCanvas = ({
   }, [img, posX, posY, sizeHeight, sizeWidth, brightness, red, green, blue, onColorChange, canvasRef]);
 
   return (
+    // Повернення канвасу для відображення зображення
     <Box sx={canvasStyles.imageWrapper}>
       <canvas ref={canvasRef} style={canvasStyles.canvas}></canvas>
     </Box>
