@@ -4,21 +4,22 @@ class KochSnowflake extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      MAX_NUMBER_OF_ITERATIONS: 7,
-      iterations: props.iterations || 0,
-      color: props.color || '#000000',
-      size: props.size || 1100, // Adjust this to set the size of the fractal
-      selectedKochFractal: props.selectedKochFractal,
+      MAX_NUMBER_OF_ITERATIONS: 7,// Максимальна кількість ітерацій
+      iterations: props.iterations || 0, // Кількість ітерацій
+      color: props.color || '#000000',// Колір ліній
+      size: props.size || 1100,  // Розмір полотна
+      selectedKochFractal: props.selectedKochFractal,// Вид фрактала Коха
     };
   }
 
   componentDidMount() {
+     // Отримання контексту для малювання на canvas
     const canvas = this.refs.canvas;
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = "rgb(0,0,255)"
     const { iterations, color, size } = this.state;
 
-    // Define the starting points of the equilateral triangle
+     // Визначення точок для створення початкового рівностороннього трикутника
     const p1 = { x: size * 0.3 - size * 0.3, y: 150 };
     const p2 = { x: size * 0.7 - size * 0.3, y: 150 };
     const p3 = {
@@ -27,22 +28,23 @@ class KochSnowflake extends Component {
     };
 
 
-    //background color
+     // Фон канвасу
     ctx.globalCompositeOperation = 'destination-under'
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Call the function to draw the Koch Snowflake
+   // Виклик функції для малювання сніжинки Коха
     this.drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color);
   }
 
+  // Функція для малювання трикутника
   drawTriangle(){
     const canvas = this.refs.canvas;
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = "rgb(0,0,255)"
     const { iterations, color, size } = this.state;
 
-    // Define the starting points of the equilateral triangle
+     // Визначення точок для рівностороннього трикутника
     const p1 = { x: size * 0.3 - size * 0.3, y: 150 };
     const p2 = { x: size * 0.7 - size * 0.3, y: 150 };
     const p3 = {
@@ -50,15 +52,16 @@ class KochSnowflake extends Component {
       y: (p1.y + p2.y) / 2 + (p2.x - p1.x) * (Math.sqrt(3) / 2),
     };
 
-    //background color
+     // Фон канвасу
     ctx.globalCompositeOperation = 'destination-under'
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Call the function to draw the Koch Snowflake
+    // Виклик функції для малювання сніжинки Коха
     this.drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color);
   }
 
+   // Функція для малювання сніжинки Коха
   drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color, selectedKochFractal) {
     if('' === iterations) return;
     if(0 > iterations || this.state.MAX_NUMBER_OF_ITERATIONS < iterations) return;
@@ -70,13 +73,13 @@ class KochSnowflake extends Component {
 
   drawKochFractal(ctx, p1, p2, iterations, size, color, selectedKochFractal) {
     if (iterations === 0 || iterations === "0") {
-      // Draw a line segment
-      ctx.beginPath();
-      ctx.moveTo(p1.x, p1.y);
-      ctx.lineTo(p2.x, p2.y);
-      ctx.strokeStyle = color;
-      ctx.stroke();
-      ctx.fillStyle = "rgb(0,0,255)"
+       // Малювання лінії
+      ctx.beginPath();// Починаємо новий шлях для малювання
+      ctx.moveTo(p1.x, p1.y); // Встановлюємо початкову точку лінії
+      ctx.lineTo(p2.x, p2.y);// Малюємо лінію до певної точки
+      ctx.strokeStyle = color;// Встановлюємо колір лінії зі змінної color
+      ctx.stroke(); // Виконуємо малювання лінії
+      ctx.fillStyle = "rgb(0,0,255)"// Встановлюємо колір заливки
     } else {
 
       let rand1 = 1;
@@ -84,14 +87,17 @@ class KochSnowflake extends Component {
 
       let inverted = 1;
 
+      // Перевірка типу вибраного фрактала.
       if (selectedKochFractal === "randomized") {
-        rand1 = Math.random() * (1 - 0.1) + 0.1;
+        // Якщо вибраний тип "randomized", генеруються випадкові значення для rand1 та rand2 в межах від 0.1 до 1.
+        rand1 = Math.random() * (1 - 0.1) + 0.1; 
         rand2 = Math.random() * (1 - 0.1) + 0.1;
       } else if (selectedKochFractal === "inverted") {
+         // Якщо вибраний тип "inverted", змінна inverted встановлюється на -1 для зміни орієнтації побудови точок фрактала.
         inverted = -1;
       }
 
-      // Calculate new points
+       // Обчислення нових точок
       const p3 = {
         x: p1.x + rand1 * (p2.x - p1.x) / 3,
         y: p1.y + rand2 * (p2.y - p1.y) / 3,
@@ -105,7 +111,7 @@ class KochSnowflake extends Component {
         y: p1.y + rand2 * (p2.y - p1.y) * 2 / 3,
       };
 
-      // Recursively draw smaller segments
+       // Рекурсивне малювання менших відрізків
       this.drawKochFractal(ctx, p1, p3, iterations - 1, size, color, selectedKochFractal);
       this.drawKochFractal(ctx, p3, p4, iterations - 1, size, color, selectedKochFractal);
       this.drawKochFractal(ctx, p4, p5, iterations - 1, size, color, selectedKochFractal);
@@ -123,7 +129,7 @@ class KochSnowflake extends Component {
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      //background color
+      // Фон канвасу
       ctx.globalCompositeOperation = 'destination-under'
       ctx.fillStyle = "white";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -135,7 +141,7 @@ class KochSnowflake extends Component {
 
       this.setState({ iterations, color, size, selectedKochFractal });
 
-      // Define the starting points of the equilateral triangle
+       // Визначення точок для рівностороннього трикутника
       const p1 = { x: size * 0.3 - size * 0.3, y: 150 };
       const p2 = { x: size * 0.7 - size * 0.3, y: 150 };
       const p3 = {
@@ -143,7 +149,7 @@ class KochSnowflake extends Component {
         y: (p1.y + p2.y) / 2 + (p2.x - p1.x) * (Math.sqrt(3) / 2),
       };
 
-      // Call the function to draw the Koch Snowflake
+       // Виклик функції для малювання сніжинки Коха
       this.drawKochSnowflake(ctx, p1, p2, p3, iterations, size, color, selectedKochFractal);
 
       this.render();
